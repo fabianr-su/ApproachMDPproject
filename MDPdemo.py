@@ -14,16 +14,18 @@ b747 = aircraft(350000., 0.33, 1500./3600, [100, 90, 80, 70], [150, 130, 110, 90
 # approachMDP class: (atmosphere, aircraft, initialState, finalState)
 initState = (11000, 105, 0, 250000)
 FAFState = (1000, 70, 3)
-mdp737 = ApproachMDP(atmosphere, b737, initState, FAFState, 2)
+mdp737 = ApproachMDP(atmosphere, b737, initState, FAFState)
 
 ## import real aircraft trajectories
 
 csvDict = csv2dict.csvImport('adsb-data/logs') # generate the class
 try:
     csvDict.readcsvs() # actually import the data
+except:
+	pass
 
 ## load computed policy:
-with open('policy737Alt11000Factor2', 'rb') as f:
+with open('policy737cruise1000vi', 'rb') as f:
 # with open('policy737cruise1000vi', 'rb') as f:
     vi737 = pickle.load(f)
 
