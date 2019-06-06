@@ -108,8 +108,13 @@ def plotTrajectory(mdpInstance, vi, csv, state, figSize=(16, 8)):
 
     
     ## plot vertical profiles
-    print('Plotting reference trajectories...')
-    csv.plotVerticalProfiles(fs=18, fSize=figSize)
+    try:
+        print('Plotting reference trajectories...')
+        csv.plotVerticalProfiles(fs=18, fSize=figSize)
+    except:
+        print('Failed to plot reference trajectories.')
+        plt.figure(figsize=figSize)
+
     ax = plt.gca()
     # plot MDP profile
     dd, lw, ms = 12, 6, 9
@@ -127,7 +132,10 @@ def plotTrajectory(mdpInstance, vi, csv, state, figSize=(16, 8)):
 
     plt.legend(handles, labels, fontsize=16)
     ## plot velocity profiles
-    csv.plotVelocityProfiles(fs=18, fSize=figSize)
+    try:
+        csv.plotVelocityProfiles(fs=18, fSize=figSize)
+    except:
+        plt.figure(figsize=figSize)
     ax = plt.gca()
     # plot MDP profile
     plt.plot([d+dd for d in velDist], TAS, 'k', linewidth=lw)
